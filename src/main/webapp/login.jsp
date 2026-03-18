@@ -1,0 +1,61 @@
+<%-- Document : index Created on : Mar 16, 2026, 10:17:10 AM Author : dm --%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Knowledge Hub</title>
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <body class="bg-[#F5F7FA] min-h-screen flex items-center justify-center p-4 font-sans text-[#2C2C2C]">
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+
+      <div class="bg-[#27138B] p-8 text-center">
+        <h1 class="text-white text-2xl font-bold tracking-tight">Knowledge Hub</h1>
+        <p class="text-[#CDB0FF] text-sm mt-2">Ask questions, share expertise, and find answers.</p>
+      </div>
+
+      <div class="p-8">
+        <form action="login" method="POST" class="space-y-6">
+          <div>
+            <label for="email" class="block text-sm font-semibold mb-2">Email</label>
+            <input type="email" id="email" name="email"
+                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#CDB0FF] focus:border-[#27138B] outline-none transition-all placeholder:text-gray-400"
+                   placeholder="Enter your email" required>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-2">
+              <label for="password" class="text-sm font-semibold">Password</label>
+            </div>
+            <input type="password" id="password" name="password"
+                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#CDB0FF] focus:border-[#27138B] outline-none transition-all placeholder:text-gray-400"
+                   placeholder="••••••••" required>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit"
+                    class="w-full bg-[#27138B] hover:bg-[#1e0e6b] text-white font-bold py-3 rounded-lg transition-colors shadow-md">
+              Sign In
+            </button>
+          </div>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+          <p class="text-sm text-gray-600">
+            New to the community?
+            <a href="register.jsp" class="text-[#27138B] font-bold hover:underline ml-1">Create an account</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 px-8 py-4 text-center">
+        <p class="text-xs text-gray-500 italic">Join 10,000+ users solving problems together.</p>
+      </div>
+    </div>
+  </body>
+</html>

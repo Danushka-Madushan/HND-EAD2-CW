@@ -1,0 +1,23 @@
+# --- Maven ---
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties
+
+# --- IDEs ---
+.vscode/
+.idea/
+.settings/
+.project
+.classpath
+nb-configuration.xml
+
+# --- Database & Logs ---
+*.log
+dir.txt
+
+# --- Binaries & Libraries ---
+# You have a 'lib' folder with a MySQL JAR. 
+# Usually, Maven handles this via pom.xml, so the lib folder is redundant.
+*.jar
+*.war
