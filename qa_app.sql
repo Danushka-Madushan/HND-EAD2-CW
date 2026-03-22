@@ -44,6 +44,12 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE `banned_users` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `banned_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`),
@@ -84,8 +90,9 @@ ALTER TABLE `questions`
   ADD CONSTRAINT `fk_questions_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
+--    The hash below is a bcrypt hash of the placeholder password: "Admin@1234"
 INSERT INTO admins (name, email, password_hash)
-SELECT 'Super Admin', 'admin@example.com', '$2b$12$ePCE7lJsVbMBQYEMCFVlJuPBaXKiEKVDwq0MuQRK3R5nS6BpFqzGy'
+SELECT 'Super Admin', 'admin@example.com', '$2a$12$MRdOF9PU95QaQpyiROiUiOHJAY5C3iF7gXWc9Atsuxr5nZoItuhry'
 WHERE NOT EXISTS (
     SELECT 1 FROM admins WHERE email = 'admin@example.com'
 );
