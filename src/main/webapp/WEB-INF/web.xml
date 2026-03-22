@@ -39,6 +39,18 @@
         <servlet-name>markAccepted</servlet-name>
         <servlet-class>controllers.markAccepted</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>adminLogin</servlet-name>
+        <servlet-class>controllers.adminLogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminDashboard</servlet-name>
+        <servlet-class>controllers.adminDashboard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminLogout</servlet-name>
+        <servlet-class>controllers.adminLogout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -74,6 +86,18 @@
     <servlet-mapping>
         <servlet-name>markAccepted</servlet-name>
         <url-pattern>/markAccepted</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminLogin</servlet-name>
+        <url-pattern>/adminLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminDashboard</servlet-name>
+        <url-pattern>/adminDashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminLogout</servlet-name>
+        <url-pattern>/adminLogout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

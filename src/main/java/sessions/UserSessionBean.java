@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.sql.DataSource;
+import models.DashboardUsers;
 import models.UserAuthInfo;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -94,6 +95,35 @@ public class UserSessionBean {
 
         } catch (SQLException ex) {
             return false;
+        }
+    }
+
+    public DashboardUsers[] getDashboardUsers() {
+        String sql = "SELECT u.id, u.name, u.profile_pic_url, u.email, (SELECT COUNT(*) FROM questions q WHERE q.user_id = u.id) AS questionCount, (SELECT COUNT(*) FROM answers a WHERE a.user_id = u.id) AS answerCount FROM users u ORDER BY u.created_at DESC";
+
+        try (
+            Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+        ) {
+            DashboardUsers[] users = new DashboardUsers[100]; // Arbitrary size, can be optimized
+            int index = 0;
+
+            while (rs.next() && index < users.length) {
+                users[index++] = new DashboardUsers(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("profile_pic_url"),
+                        rs.getString("email"),
+                        rs.getInt("questionCount"),
+                        rs.getInt("answerCount")
+                );
+            }
+            /* Return only filled portion */
+            return java.util.Arrays.copyOf(users, index);
+
+        } catch (SQLException ex) {
+            return new DashboardUsers[0];
         }
     }
 }

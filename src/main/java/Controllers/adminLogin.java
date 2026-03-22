@@ -12,18 +12,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import models.UserAuthInfo;
-import sessions.UserSessionBean;
+import models.Admin;
+import sessions.AdminSessionBean;
 
 /**
  *
  * @author Danushka-Madushan
  */
-public class login extends HttpServlet {
+public class adminLogin extends HttpServlet {
 
-    /* Inject the UserSessionBean EJB */
     @EJB
-    private UserSessionBean userSessionBean;
+    private AdminSessionBean adminSessionBean;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -37,20 +36,18 @@ public class login extends HttpServlet {
             oldSession.invalidate();
         }
 
-        UserAuthInfo isAuthenticated = userSessionBean.verifyLogin(email, password);
+        Admin admin = adminSessionBean.verifyLogin(email, password);
         HttpSession session = request.getSession(true);
 
-        if (isAuthenticated.isAuthenticated()) {
+        if (admin.isAuthenticated()) {
             request.setAttribute("status", "SUCCESS");
             
-            session.setAttribute("isAuthenticated", true);
-            session.setAttribute("userName", isAuthenticated.getUserName());
-            session.setAttribute("userId", isAuthenticated.getUserId());
-            session.setAttribute("avatar_url", isAuthenticated.getAvatar_url());
+            session.setAttribute("isAdminAuthenticated", true);
+            session.setAttribute("AdminUserName", admin.getName());
         } else {
             request.setAttribute("status", "FAILED");
         }
 
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
     }
 }
