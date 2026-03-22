@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controllers;
+package controllers;
 
-import Models.Users;
+import sessions.UserSessionBean;
+import jakarta.ejb.EJB;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -18,6 +19,10 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class register extends HttpServlet {
 
+  /* Injects the UserSessionBean EJB */
+  @EJB
+  private UserSessionBean userSessionBean;
+
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
@@ -30,7 +35,7 @@ public class register extends HttpServlet {
   
     RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
    
-    if (Users.isEmailInUse(email))
+    if (userSessionBean.isEmailInUse(email))
     {
       request.setAttribute("status", "EMAIL_IN_USE");
       dispatcher.forward(request, response);
@@ -45,9 +50,8 @@ public class register extends HttpServlet {
       dispatcher.forward(request, response);
       return;
     }
-    
-    Users users = new Users();
-    boolean isUserCreated = users.InsertUser(name, email, password, avatar_link);
+
+    boolean isUserCreated = userSessionBean.InsertUser(name, email, password, avatar_link);
     
     if (isUserCreated) {
       request.setAttribute("status", "SUCCESS");
