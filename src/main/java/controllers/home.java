@@ -36,7 +36,7 @@ public class home extends HttpServlet {
             int userId = (int) session.getAttribute("userId");
             request.setAttribute("userActivity", activitySessionBean.getActivityInfo(userId));
         }
-        
+
         request.setAttribute("questionList", questions);
         request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
     }

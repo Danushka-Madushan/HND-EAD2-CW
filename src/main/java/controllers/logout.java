@@ -20,11 +20,10 @@ public class logout extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
 
-        if (session != null)
-        {
+        if (session != null) {
             session.invalidate();
         }
         response.sendRedirect("login.jsp");

@@ -35,7 +35,7 @@ public class adminDashboard extends HttpServlet {
 
         request.setAttribute("dashboardData", dashboardData);
         request.setAttribute("dashboardUsers", dashboardUsers);
-        
+
         request.getRequestDispatcher("/WEB-INF/admin/adminDashboard.jsp").forward(request, response);
     }
 }

@@ -32,7 +32,7 @@ public class login extends HttpServlet {
         String password = request.getParameter("password");
 
         /* Kill the old session if it exists */
-        HttpSession oldSession = request.getSession(false); 
+        HttpSession oldSession = request.getSession(false);
         if (oldSession != null) {
             oldSession.invalidate();
         }
@@ -42,7 +42,7 @@ public class login extends HttpServlet {
 
         if (isAuthenticated.isAuthenticated()) {
             request.setAttribute("status", "SUCCESS");
-            
+
             session.setAttribute("isAuthenticated", true);
             session.setAttribute("userName", isAuthenticated.getUserName());
             session.setAttribute("userId", isAuthenticated.getUserId());

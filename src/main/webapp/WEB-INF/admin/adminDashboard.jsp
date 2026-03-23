@@ -227,12 +227,14 @@
                         confirmButton: "w-32 py-3 rounded-lg transition-colors shadow-md bg-[#27138B] hover:bg-[#1e0e6b] text-white font-semibold"
                     }
                 });
-            };
+            }
+            ;
 
             const status = "${sessionScope.status}";
 
             switch (status) {
-                case "FAILED": {
+                case "FAILED":
+                {
                     FailedBan();
                     break;
                 }

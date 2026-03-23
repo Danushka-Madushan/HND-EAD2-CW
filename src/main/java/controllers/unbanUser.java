@@ -18,18 +18,18 @@ import sessions.UserSessionBean;
  */
 public class unbanUser extends HttpServlet {
 
-  @EJB
-  private UserSessionBean userSessionBean;
+    @EJB
+    private UserSessionBean userSessionBean;
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    /* Get userId from URL */
-    int userId = Integer.parseInt(request.getPathInfo().substring(1));
-    boolean success = userSessionBean.unbanUserById(userId);
-    if (!success) {
-      request.getSession().setAttribute("status", "FAILED");
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        /* Get userId from URL */
+        int userId = Integer.parseInt(request.getPathInfo().substring(1));
+        boolean success = userSessionBean.unbanUserById(userId);
+        if (!success) {
+            request.getSession().setAttribute("status", "FAILED");
+        }
+        response.sendRedirect(request.getContextPath() + "/bannedList");
     }
-    response.sendRedirect(request.getContextPath() + "/bannedList");
-  }
 }

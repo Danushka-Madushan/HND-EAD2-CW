@@ -18,7 +18,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Knowledge Hub</title>
-        <link rel="icon" type="image/png" href="favicon.ico" />
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/favicon.ico" />
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,7 +65,7 @@
         <main class="max-w-3xl mx-auto px-4 pb-12">
             <a href="${pageContext.request.contextPath}/home" class="text-base font-bold text-[#27138B] hover:underline flex items-center gap-2 mt-6 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
                 Back to Discussions
             </a>
@@ -134,7 +134,8 @@
                 if (event.target.files[0]) {
                     reader.readAsDataURL(event.target.files[0]);
                 }
-            };
+            }
+            ;
 
             function Success() {
                 Swal.fire({
@@ -151,10 +152,11 @@
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = 'home';
+                        window.location.href = '${pageContext.request.contextPath}/home';
                     }
                 });
-            };
+            }
+            ;
 
             function Failed() {
                 Swal.fire({
@@ -171,7 +173,8 @@
                         confirmButton: "w-32 py-3 rounded-lg transition-colors shadow-md bg-[#27138B] hover:bg-[#1e0e6b] text-white font-semibold"
                     }
                 });
-            };
+            }
+            ;
 
             switch ("${status}") {
                 case "FAILED":

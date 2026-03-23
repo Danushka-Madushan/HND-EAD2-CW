@@ -26,7 +26,7 @@ public class markAccepted extends HttpServlet {
             throws ServletException, IOException {
         int answerId = Integer.parseInt(request.getParameter("answerId"));
         int questionId = Integer.parseInt(request.getParameter("questionId"));
-        
+
         boolean success = answerSessionBean.markAnswerAsAccepted(answerId);
         if (!success) {
             request.getSession().setAttribute("status", "FAILED_MARK_ACCEPTED");

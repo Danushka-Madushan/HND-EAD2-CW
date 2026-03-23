@@ -26,6 +26,7 @@ import models.Util;
  */
 @MultipartConfig
 public class upload extends HttpServlet {
+
     @EJB
     private QuestionSessionBean questionSessionBean;
     private static final String UPLOAD_DIR = "D:/qa_uploads/";
@@ -44,11 +45,11 @@ public class upload extends HttpServlet {
 
             File uploadDir = new File(UPLOAD_DIR);
             if (!uploadDir.exists()) {
-                uploadDir.mkdirs(); 
+                uploadDir.mkdirs();
             }
 
             fileName = UUID.randomUUID().toString() + "_" + Util.getFileName(filePart);
-            
+
             File fileToSave = new File(uploadDir, fileName);
 
             try (InputStream input = filePart.getInputStream()) {

@@ -28,7 +28,7 @@ public class discussion extends HttpServlet {
         /* Get question id from URL */
         int questionId = Integer.parseInt(request.getPathInfo().substring(1));
         QuestionWithAnswers questionContent = questionSessionBean.getQuestionWithAnswers(questionId);
-        
+
         request.setAttribute("questionContent", questionContent);
         request.getRequestDispatcher("/WEB-INF/views/discussions.jsp").forward(request, response);
     }

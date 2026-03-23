@@ -31,7 +31,7 @@ public class adminLogin extends HttpServlet {
         String password = request.getParameter("password");
 
         /* Kill the old session if it exists */
-        HttpSession oldSession = request.getSession(false); 
+        HttpSession oldSession = request.getSession(false);
         if (oldSession != null) {
             oldSession.invalidate();
         }
@@ -41,7 +41,7 @@ public class adminLogin extends HttpServlet {
 
         if (admin.isAuthenticated()) {
             request.setAttribute("status", "SUCCESS");
-            
+
             session.setAttribute("isAdminAuthenticated", true);
             session.setAttribute("AdminUserName", admin.getName());
         } else {

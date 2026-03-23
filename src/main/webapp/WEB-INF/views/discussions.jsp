@@ -62,11 +62,11 @@
                 </form>
             </div>
         </nav>
-        
+
         <main class="max-w-4xl mx-auto px-4 pb-10">
             <a href="${pageContext.request.contextPath}/home" class="text-base font-bold text-[#27138B] hover:underline flex items-center gap-2 my-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
                 Back to Discussions
             </a>
@@ -186,7 +186,8 @@
                         confirmButton: "w-32 py-3 rounded-lg transition-colors shadow-md bg-[#27138B] hover:bg-[#1e0e6b] text-white font-semibold"
                     }
                 });
-            };
+            }
+            ;
 
             function FailedMark() {
                 Swal.fire({
@@ -203,16 +204,19 @@
                         confirmButton: "w-32 py-3 rounded-lg transition-colors shadow-md bg-[#27138B] hover:bg-[#1e0e6b] text-white font-semibold"
                     }
                 });
-            };
+            }
+            ;
 
             const status = "${sessionScope.status}";
 
             switch (status) {
-                case "FAILED": {
+                case "FAILED":
+                {
                     Failed();
                     break;
                 }
-                case "FAILED_MARK_ACCEPTED": {
+                case "FAILED_MARK_ACCEPTED":
+                {
                     FailedMark();
                     break;
                 }

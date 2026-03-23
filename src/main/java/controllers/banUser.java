@@ -18,19 +18,19 @@ import sessions.UserSessionBean;
  */
 public class banUser extends HttpServlet {
 
-  @EJB
-  private UserSessionBean userSessionBean;
+    @EJB
+    private UserSessionBean userSessionBean;
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    /* Get userId from URL */
-    int userId = Integer.parseInt(request.getPathInfo().substring(1));
-    boolean success = userSessionBean.banUserById(userId);
-    if (!success) {
-      request.getSession().setAttribute("status", "FAILED");
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        /* Get userId from URL */
+        int userId = Integer.parseInt(request.getPathInfo().substring(1));
+        boolean success = userSessionBean.banUserById(userId);
+        if (!success) {
+            request.getSession().setAttribute("status", "FAILED");
+        }
+        response.sendRedirect(request.getContextPath() + "/adminDashboard");
     }
-    response.sendRedirect(request.getContextPath() + "/adminDashboard");
-  }
 
 }

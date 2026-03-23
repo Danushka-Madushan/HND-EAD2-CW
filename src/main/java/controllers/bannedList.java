@@ -10,7 +10,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import models.DashboardData;
 import models.DashboardUsers;
+import sessions.AdminSessionBean;
 import sessions.UserSessionBean;
 
 /**
@@ -19,16 +21,20 @@ import sessions.UserSessionBean;
  */
 public class bannedList extends HttpServlet {
 
-  @EJB
+    @EJB
     private UserSessionBean userSessionBean;
+    @EJB
+    private AdminSessionBean adminSessionBean;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         DashboardUsers[] bannedUsers = userSessionBean.getBannedUsers();
+        DashboardData dashboardData = adminSessionBean.getDashboardData();
         request.setAttribute("bannedUsers", bannedUsers);
-        
+        request.setAttribute("dashboardData", dashboardData);
+
         request.getRequestDispatcher("/WEB-INF/admin/bannedList.jsp").forward(request, response);
     }
 }
