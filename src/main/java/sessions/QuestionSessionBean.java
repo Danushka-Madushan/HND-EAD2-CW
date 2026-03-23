@@ -81,6 +81,51 @@ public class QuestionSessionBean {
         }
     }
 
+    public Question[] getQuestionsOlderThanThreeMonths() {
+        String sql = "SELECT q.id, q.user_id, q.title, q.description, q.image_url, q.created_at, u.name, u.profile_pic_url FROM questions q JOIN users u ON q.user_id = u.id WHERE q.created_at < (NOW() - INTERVAL 3 MONTH) ORDER BY q.created_at DESC";
+        try (
+            Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+            ResultSet rs = stmt.executeQuery();
+
+            ArrayList<Question> questionsList = new ArrayList<>();
+            while (rs.next()) {
+                Question question = new Question(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getInt("user_id"),
+                    rs.getString("profile_pic_url"),
+                    rs.getString("title"),
+                    rs.getString("description"),
+                    rs.getString("image_url"),
+                    rs.getTimestamp("created_at").toString(),
+                    answerSessionBean.getAnswerCountForQuestion(rs.getInt("id"))
+                );
+                questionsList.add(question);
+            }
+            return questionsList.toArray(Question[]::new);
+
+        } catch (SQLException ex) {
+            return new Question[0];
+        }
+    }
+
+    public boolean deleteQuestion(int questionId) {
+        String sql = "DELETE FROM questions WHERE id = ?";
+        try (
+            Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+            stmt.setInt(1, questionId);
+            int rowsAffected = stmt.executeUpdate();
+            return (rowsAffected > 0);
+
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
     public QuestionWithAnswers getQuestionWithAnswers(int questionId) {
         String sql = "SELECT q.id, q.user_id, q.title, q.description, q.image_url, q.created_at, u.name, u.profile_pic_url FROM questions q JOIN users u ON q.user_id = u.id WHERE q.id = ?";
         try (
