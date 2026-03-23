@@ -212,7 +212,7 @@
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '${pageContext.request.contextPath}/deleteUser/' + userId;
+                        window.location.href = '${pageContext.request.contextPath}/deleteUser/' + userId + "-2";
                     }
                 });
             }

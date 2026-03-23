@@ -71,6 +71,10 @@
         <servlet-name>unbanUser</servlet-name>
         <servlet-class>controllers.unbanUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteUser</servlet-name>
+        <servlet-class>controllers.deleteUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -130,6 +134,10 @@
     <servlet-mapping>
         <servlet-name>unbanUser</servlet-name>
         <url-pattern>/unbanUser/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteUser</servlet-name>
+        <url-pattern>/deleteUser/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

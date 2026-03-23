@@ -92,9 +92,9 @@ COMMIT;
 
 --    The hash below is a bcrypt hash of the placeholder password: "Admin@1234"
 INSERT INTO admins (name, email, password_hash)
-SELECT 'Super Admin', 'admin@example.com', '$2a$12$MRdOF9PU95QaQpyiROiUiOHJAY5C3iF7gXWc9Atsuxr5nZoItuhry'
+SELECT 'Super Admin', 'super@admin.com', '$2a$12$MRdOF9PU95QaQpyiROiUiOHJAY5C3iF7gXWc9Atsuxr5nZoItuhry'
 WHERE NOT EXISTS (
-    SELECT 1 FROM admins WHERE email = 'admin@example.com'
+    SELECT 1 FROM admins WHERE email = 'super@admin.com'
 );
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

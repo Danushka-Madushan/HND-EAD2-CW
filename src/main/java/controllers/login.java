@@ -37,16 +37,24 @@ public class login extends HttpServlet {
             oldSession.invalidate();
         }
 
-        UserAuthInfo isAuthenticated = userSessionBean.verifyLogin(email, password);
+        UserAuthInfo user = userSessionBean.verifyLogin(email, password);
         HttpSession session = request.getSession(true);
 
-        if (isAuthenticated.isAuthenticated()) {
+        if (user != null && user.isAuthenticated()) {
+            /* Check if user is banned */
+            boolean isBanned = userSessionBean.isUserBanned(user.getUserId());
+            if (isBanned) {
+                request.setAttribute("status", "BANNED");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+
             request.setAttribute("status", "SUCCESS");
 
             session.setAttribute("isAuthenticated", true);
-            session.setAttribute("userName", isAuthenticated.getUserName());
-            session.setAttribute("userId", isAuthenticated.getUserId());
-            session.setAttribute("avatar_url", isAuthenticated.getAvatar_url());
+            session.setAttribute("userName", user.getUserName());
+            session.setAttribute("userId", user.getUserId());
+            session.setAttribute("avatar_url", user.getAvatar_url());
         } else {
             request.setAttribute("status", "FAILED");
         }

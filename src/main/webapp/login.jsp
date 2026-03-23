@@ -87,6 +87,23 @@
                 });
             }
 
+            function UserBanned() {
+                Swal.fire({
+                    title: 'User Banned',
+                    text: "Your account has been banned, please contact the administrator.",
+                    icon: 'error',
+                    buttonsStyling: false,
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                    showCloseButton: false,
+                    customClass: {
+                        confirmButton: "w-32 py-3 rounded-lg transition-colors shadow-md bg-[#27138B] hover:bg-[#1e0e6b] text-white font-semibold"
+                    }
+                });
+            }
+
             function InvalidCredential() {
                 Swal.fire({
                     title: 'Incorrect Credentials',
@@ -108,6 +125,11 @@
                 case "FAILED":
                 {
                     InvalidCredential();
+                    break;
+                }
+                case "BANNED":
+                {
+                    UserBanned();
                     break;
                 }
                 case "SUCCESS":
