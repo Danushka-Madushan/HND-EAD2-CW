@@ -99,7 +99,116 @@ public class UserSessionBean {
     }
 
     public DashboardUsers[] getDashboardUsers() {
-        String sql = "SELECT u.id, u.name, u.profile_pic_url, u.email, (SELECT COUNT(*) FROM questions q WHERE q.user_id = u.id) AS questionCount, (SELECT COUNT(*) FROM answers a WHERE a.user_id = u.id) AS answerCount FROM users u ORDER BY u.created_at DESC";
+        String sql = "SELECT u.id, u.name, u.profile_pic_url, u.email, (SELECT COUNT(*) FROM questions q WHERE q.user_id = u.id) AS questionCount, (SELECT COUNT(*) FROM answers a WHERE a.user_id = u.id) AS answerCount FROM users u WHERE u.id NOT IN (SELECT user_id FROM banned_users) ORDER BY u.created_at DESC;";
+
+        try (
+            Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+        ) {
+            DashboardUsers[] users = new DashboardUsers[100]; // Arbitrary size, can be optimized
+            int index = 0;
+
+            while (rs.next() && index < users.length) {
+                users[index++] = new DashboardUsers(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("profile_pic_url"),
+                        rs.getString("email"),
+                        rs.getInt("questionCount"),
+                        rs.getInt("answerCount")
+                );
+            }
+            /* Return only filled portion */
+            return java.util.Arrays.copyOf(users, index);
+
+        } catch (SQLException ex) {
+            return new DashboardUsers[0];
+        }
+    }
+
+    public boolean banUserById(int userId) {
+        String sql = "INSERT INTO `banned_users` (`user_id`) VALUES (?)";
+
+        try (
+            Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+            stmt.setInt(1, userId);
+            int rowsAffected = stmt.executeUpdate();
+            return (rowsAffected > 0);
+
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
+    public boolean unbanUserById(int userId) {
+        String sql = "DELETE FROM `banned_users` WHERE `user_id` = ?";
+
+        try (
+            Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+            stmt.setInt(1, userId);
+            int rowsAffected = stmt.executeUpdate();
+            return (rowsAffected > 0);
+
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
+    public boolean isUserBanned(int userId) {
+        String sql = "SELECT 1 FROM `banned_users` WHERE `user_id` = ?";
+
+        try (
+            Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+            stmt.setInt(1, userId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
+    public boolean deleteUserById(int userId) {
+        String deleteUserSql = "DELETE FROM `users` WHERE `id` = ?";
+        String deleteBanSql = "DELETE FROM `banned_users` WHERE `user_id` = ?";
+
+        try (
+            Connection conn = dataSource.getConnection();
+            PreparedStatement deleteUserStmt = conn.prepareStatement(deleteUserSql);
+            PreparedStatement deleteBanStmt = conn.prepareStatement(deleteBanSql);
+        ) {
+            /* Start transaction */
+            conn.setAutoCommit(false);
+
+            /* Delete from users */
+            deleteUserStmt.setInt(1, userId);
+            int userRowsAffected = deleteUserStmt.executeUpdate();
+
+            /* Delete from banned_users */
+            deleteBanStmt.setInt(1, userId);
+            deleteBanStmt.executeUpdate();
+
+            /* Commit transaction */
+            conn.commit();
+
+            return (userRowsAffected > 0);
+
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
+    public DashboardUsers[] getBannedUsers() {
+        String sql = "SELECT u.id, u.name, u.profile_pic_url, u.email, (SELECT COUNT(*) FROM questions q WHERE q.user_id = u.id) AS questionCount, (SELECT COUNT(*) FROM answers a WHERE a.user_id = u.id) AS answerCount FROM users u JOIN banned_users b ON u.id = b.user_id ORDER BY u.created_at DESC";
 
         try (
             Connection conn = dataSource.getConnection();

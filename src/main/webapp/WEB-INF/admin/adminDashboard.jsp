@@ -105,7 +105,7 @@
                 <div class="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
                     <h2 class="font-black text-[#27138B] uppercase tracking-tight">User Management</h2>
 
-                    <a href="${pageContext.request.contextPath}/bannedList.jsp" class="bg-[#27138B] hover:bg-[#1e0e6b] text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-md flex items-center gap-2">
+                    <a href="${pageContext.request.contextPath}/bannedList" class="bg-[#27138B] hover:bg-[#1e0e6b] text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-md flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>
@@ -143,10 +143,10 @@
                                     </td>
                                     <td class="px-6 py-5">
                                         <div class="flex justify-end gap-3">
-                                            <button class="bg-indigo-50 hover:bg-[#27138B] text-[#27138B] hover:text-white border border-indigo-100 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer">
+                                            <button onclick="BanConfirmation('${user.getId()}')" class="bg-indigo-50 hover:bg-[#27138B] text-[#27138B] hover:text-white border border-indigo-100 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer">
                                                 Ban User
                                             </button>
-                                            <button class="bg-red-50 hover:bg-red-600 text-red-600 hover:text-white border border-red-100 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer">
+                                            <button onclick="DeleteConfirmation('${user.getId()}')" class="bg-red-50 hover:bg-red-600 text-red-600 hover:text-white border border-red-100 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer">
                                                 Delete
                                             </button>
                                         </div>
@@ -163,6 +163,81 @@
             </div>
 
         </main>
+        <script>
+            function BanConfirmation(userId) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "This user will be banned and won't be able to access their account.",
+                    icon: 'warning',
+                    buttonsStyling: false,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                    showCloseButton: false,
+                    showCancelButton: true,
+                    customClass: {
+                        confirmButton: "w-32 mr-4 cursor-pointer py-3 rounded-lg transition-colors shadow-md bg-[#27138B] hover:bg-[#1e0e6b] text-white font-semibold",
+                        cancelButton: "w-32 ml-4 cursor-pointer py-3 rounded-lg transition-colors shadow-md bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold"
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '${pageContext.request.contextPath}/banUser/' + userId;
+                    }
+                });
+            }
 
+            function DeleteConfirmation(userId) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "This user will be deleted and all their data will be permanently removed.",
+                    icon: 'warning',
+                    buttonsStyling: false,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                    showCloseButton: false,
+                    showCancelButton: true,
+                    customClass: {
+                        confirmButton: "w-32 mr-4 cursor-pointer py-3 rounded-lg transition-colors shadow-md bg-[#27138B] hover:bg-[#1e0e6b] text-white font-semibold",
+                        cancelButton: "w-32 ml-4 cursor-pointer py-3 rounded-lg transition-colors shadow-md bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold"
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '${pageContext.request.contextPath}/deleteUser/' + userId;
+                    }
+                });
+            }
+
+            function FailedBan() {
+                Swal.fire({
+                    title: 'Failed to Ban User',
+                    text: "There was an error while banning the user. Please try again.",
+                    icon: 'error',
+                    buttonsStyling: false,
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                    showCloseButton: false,
+                    customClass: {
+                        confirmButton: "w-32 py-3 rounded-lg transition-colors shadow-md bg-[#27138B] hover:bg-[#1e0e6b] text-white font-semibold"
+                    }
+                });
+            };
+
+            const status = "${sessionScope.status}";
+
+            switch (status) {
+                case "FAILED": {
+                    FailedBan();
+                    break;
+                }
+            }
+        </script>
+        <c:remove var="status" scope="session" />
     </body>
 </html>

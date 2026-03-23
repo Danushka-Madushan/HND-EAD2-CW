@@ -59,6 +59,18 @@
         <servlet-name>adminLogout</servlet-name>
         <servlet-class>controllers.adminLogout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>banUser</servlet-name>
+        <servlet-class>controllers.banUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>bannedList</servlet-name>
+        <servlet-class>controllers.bannedList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>unbanUser</servlet-name>
+        <servlet-class>controllers.unbanUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -106,6 +118,18 @@
     <servlet-mapping>
         <servlet-name>adminLogout</servlet-name>
         <url-pattern>/adminLogout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>banUser</servlet-name>
+        <url-pattern>/banUser/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>bannedList</servlet-name>
+        <url-pattern>/bannedList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>unbanUser</servlet-name>
+        <url-pattern>/unbanUser/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
