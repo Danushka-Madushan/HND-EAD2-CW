@@ -29,7 +29,7 @@ public class upload extends HttpServlet {
 
     @EJB
     private QuestionSessionBean questionSessionBean;
-    private static final String UPLOAD_DIR = "D:/qa_uploads/";
+    private static final String UPLOAD_DIR = "C:/qa_uploads/";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

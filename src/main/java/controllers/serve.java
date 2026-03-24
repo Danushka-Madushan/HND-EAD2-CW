@@ -17,7 +17,7 @@ import java.nio.file.Files;
  */
 public class serve extends HttpServlet {
 
-    private static final String UPLOAD_DIR = "D:/qa_uploads/";
+    private static final String UPLOAD_DIR = "C:/qa_uploads/";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
