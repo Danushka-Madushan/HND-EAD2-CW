@@ -75,7 +75,7 @@ Since this project uses **Connection Pooling**, you must set up the JDBC resourc
 
 -----
 ## ER Diagram
-![User Register](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/ERD.jpg)
+![ERD](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/ERD.jpg)
 
 ## Screenshots
 
