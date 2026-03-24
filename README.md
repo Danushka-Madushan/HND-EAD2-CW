@@ -32,7 +32,7 @@ Since this project uses **Connection Pooling**, you must set up the JDBC resourc
       * Name: `QAAppPool`.
       * Resource Type: `javax.sql.DataSource`.
       * Database Driver: `com.mysql.cj.jdbc.MysqlDataSource`.
-      * Under **Additional Properties**, add: `user`, `password`, `url` (jdbd:mysql://localhost:3306/qa_app).
+      * Under **Additional Properties**, add: `user`, `password`, `url` (`jdbd:mysql://localhost:3306/qa_app`).
 4.  **Create a JDBC Resource:**
       * Resources \> JDBC \> JDBC Resources \> **New**.
       * JNDI Name: `jdbc/qa_app` (Ensure this matches the `@Resource` name in your Session Beans).
@@ -72,3 +72,34 @@ Since this project uses **Connection Pooling**, you must set up the JDBC resourc
 
   * **404 Not Found:** Check your context path. If you renamed the project folder, the URL might be `localhost:8080/YourNewName/`.
   * **Database Link Error:** Ensure the MySQL Connector (JAR) is added to the Payara `lib` folder or bundled within the project libraries.
+
+-----
+
+## Screenshots
+
+### User Register
+![User Register](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/screens/client_register.png)
+
+### User Login
+![User Login](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/screens/client_login.png)
+
+### Home
+![Home](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/screens/client_home.png)
+
+### Post Question
+![Post Question](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/screens/client_post_question.png)
+
+### Home (with Questions)
+![Home (with Questions)](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/screens/client_questions_home.png)
+
+### Question Page
+![Question Page](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/screens/client_discussions.png)
+
+### Admin Login
+![Admin Login](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/screens/admin_login.png)
+
+### Admin Dashboard
+![Admin Dashboard](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/screens/admin_dashboaord.png)
+
+### Admin Banned List
+![Admin Banned List](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/screens/admin_banned_list.png)
