@@ -74,6 +74,8 @@ Since this project uses **Connection Pooling**, you must set up the JDBC resourc
   * **Database Link Error:** Ensure the MySQL Connector (JAR) is added to the Payara `lib` folder or bundled within the project libraries.
 
 -----
+## ER Diagram
+![User Register](https://raw.githubusercontent.com/Danushka-Madushan/HND-EAD2-CW/refs/heads/main/ERD.jpg)
 
 ## Screenshots
 
