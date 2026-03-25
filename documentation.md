@@ -134,4 +134,4 @@ This ensures a consistent and user-friendly experience during unexpected failure
 5. Page refreshes to show updated status via `SweetAlert2` confirmation.
 
 ---
-*Documentation generated for EAD (SE) Project Demonstration.*
+**End of Project Documentation.** 

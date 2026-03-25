@@ -165,4 +165,3 @@ The routing layer. Each Servlet manages the Request/Response lifecycle.
 
 ---
 **End of Project Documentation.**  
-*Prepared for Enterprise Application Development Coursework Evaluation.*
