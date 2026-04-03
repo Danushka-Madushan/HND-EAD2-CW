@@ -1,7 +1,6 @@
 <%-- Document : index Created on : Mar 16, 2026, 10:17:10 AM Author : dm --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 
@@ -135,7 +134,7 @@
                 }
                 case "SUCCESS":
                 {
-                    LoginSuccess(<c:out value="${userName}" />);
+                    LoginSuccess("${userName}");
                     break;
                 }
             }
