@@ -53,7 +53,7 @@
                 <form method="POST" action="${pageContext.request.contextPath}/logout" class="flex items-center gap-3">
                     <div class="flex items-center gap-3 bg-gray-50 p-1.5 pr-4 rounded-full border border-gray-100">
                         <img src="${avatar_url}" alt="Avatar" class="w-10 h-10 rounded-full border border-[#CDB0FF] object-cover">
-                        <span class="text-sm font-bold hidden md:block">${userName}</span>
+                        <span class="text-sm font-bold hidden md:block"><c:out value="${userName}" /></span>
                     </div>
                     <button class="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-xs font-bold transition-colors border border-red-200 cursor-pointer uppercase tracking-wider">
                         Logout
